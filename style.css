@@ -1,34 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+/* Базові налаштування терміналу */
 body {
-  background-color: #1a1b26; /* Темний фон як на скріні */
-  color: #a9b1d6; /* Сіро-синій текст */
-  font-family: 'JetBrains Mono', monospace;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+    background-color: #1a1b26; /* Темно-синій, як у Catalyst */
+    color: #a9b1d6;
+    font-family: 'JetBrains Mono', monospace;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    line-height: 1.6;
 }
 
-/* Стилі для табів */
-.tabs {
-  margin-bottom: 30px;
-}
-.tabs button {
-  background: none;
-  border: none;
-  color: #7aa2f7; /* Синій колір для лінків/табів */
-  font-family: inherit;
-  font-size: 16px;
-  cursor: pointer;
-  padding: 0 10px 0 0;
-}
-.tabs button.active {
-  color: #9ece6a; /* Зелений для активного таба */
-  font-weight: bold;
+/* Навігація */
+.navigation {
+    margin-bottom: 40px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333;
 }
 
-/* Приховуємо неактивні блоки */
-.tab-content {
-  display: none;
+.navigation a {
+    color: #7aa2f7;
+    text-decoration: none;
+    margin-right: 15px;
 }
-.tab-content.active {
-  display: block;
+
+.navigation a:hover {
+    color: #9ece6a;
+}
+
+.navigation a.active {
+    color: #9ece6a;
+    font-weight: bold;
+}
+
+/* Заголовки */
+h1, h2, h3 {
+    color: #c0caf5;
+    font-weight: normal;
+}
+
+/* Стилі для самих постів */
+.post-header {
+    color: #bb9af7;
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+
+/* Риска, якою ти розділяєш дні */
+hr.day-separator {
+    border: none;
+    border-top: 1px dashed #444;
+    margin: 40px 0;
+}
+
+/* Риска, яку генерує Markdown від --- */
+.post-content hr {
+    border: none;
+    border-top: 1px solid #333;
+    margin: 20px 0;
 }

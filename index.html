@@ -1,61 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~/home</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <nav class="navigation">
+        <a href="index.html" class="active">[Головна]</a>
+        <a href="pages/about_day.html">Дні</a>
+        <a href="pages/project.html">Проєкти</a>
+        <a href="pages/drawings.html">Малюнки</a>
+    </nav>
 
-  <div class="tabs">
-    <button class="tab-link active" onclick="openTab(event, 'home')">[Головна]</button>
-    <button class="tab-link" onclick="openTab(event, 'projects')">Проєкти</button>
-    <button class="tab-link" onclick="openTab(event, 'drawings')">Малюнки</button>
-  </div>
-
-  <div id="home" class="tab-content active">
-    <p># Головна</p>
-    <p>Добрий день, це мій блог, і тут я буду писати про себе, про свою історію, та розказувати свої досягнення та проекти</p>
-  </div>
-
-  <div id="projects" class="tab-content">
-    <p># Проєкти</p>
-    <p>Список твоїх проєктів.</p>
-  </div>
-
-  <div id="drawings" class="tab-content">
-    <p># Малюнки</p>
-    <p>Тут можеш вставляти теги img зі своїми скетчами.</p>
-  </div>
-  <div class="days">
-    <p># Мої дні</p>
-    <div id="days-container">Завантаження записів...</div>
-  </div>
-  
-
-  <script>
-    function openTab(evt, tabName) {
-      // Ховаємо всі блоки з контентом
-      let tabcontent = document.getElementsByClassName("tab-content");
-      for (let i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].classList.remove("active");
-      }
-      
-      // Знімаємо підсвітку з усіх табів
-      let tablinks = document.getElementsByClassName("tab-link");
-      for (let i = 0; i < tablinks.length; i++) {
-        tablinks[i].classList.remove("active");
-      }
-
-      // Показуємо потрібний блок і підсвічуємо натиснутий таб
-      document.getElementById(tabName).classList.add("active");
-      evt.currentTarget.classList.add("active");
-    }
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
+    <main>
+        <h1># Головна</h1>
+        <p>Місце для думок, коду та іншого.</p>
+        <p>Якщо ти тут без мети, можеш просто поклацати по вкладках.</p>
+    </main>
 </body>
 </html>
