@@ -1,46 +1,76 @@
-// Твої налаштування
 const GITHUB_USER = 'lomon23'; 
 const REPO_NAME = 'labsss';
 const FOLDER = 'days';
 
 async function loadDays() {
     const container = document.getElementById('days-container');
-    if (!container) return; // Якщо контейнера немає на цій сторінці - нічого не робимо
+    if (!container) return; 
+
+    // Визначаємо, чи ми на локалхості
+    const isLocal = window.location.hostname === '' || window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
 
     try {
-        // 1. Стукаємо в API за списком файлів у папці days
-        const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${REPO_NAME}/contents/${FOLDER}`;
-        const response = await fetch(apiUrl);
-        
-        if (!response.ok) throw new Error('Не вдалося отримати список файлів');
-        const files = await response.json();
+        let mdFiles = [];
 
-        // 2. Відбираємо тільки .md файли
-        const mdFiles = files.filter(file => file.name.endsWith('.md'));
+        if (isLocal) {
+            // === ЛОКАЛЬНИЙ ХАК (Парсимо HTML від Live Server) ===
+            // Робимо запит до самої папки
+            const response = await fetch('../days/');
+            if (!response.ok) throw new Error('Не можу прочитати локальну папку');
+            
+            // Отримуємо сирий HTML, який згенерував Live Server
+            const htmlText = await response.text();
+            
+            // Створюємо віртуальний DOM, щоб витягнути лінки
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlText, 'text/html');
+            const links = Array.from(doc.querySelectorAll('a'));
+            
+            // Фільтруємо тільки .md файли
+            mdFiles = links
+                .map(a => a.getAttribute('href'))
+                .filter(href => href && href.endsWith('.md'))
+                .map(name => ({
+                    name: name,
+                    download_url: `../days/${name}` // Формуємо шлях для скачування
+                }));
 
-        // Очищаємо контейнер від напису "Завантаження..."
+        } else {
+            // === РЕЖИМ GITHUB (Працює як і раніше через API) ===
+            const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${REPO_NAME}/contents/${FOLDER}`;
+            const response = await fetch(apiUrl);
+            if (!response.ok) throw new Error('Помилка API');
+            const files = await response.json();
+            mdFiles = files.filter(file => file.name.endsWith('.md'));
+        }
+
+        // === СОРТУВАННЯ (НОВІ ЗВЕРХУ) ===
+        // Працюватиме тільки якщо файли названі строго ДД_ММ_РРРР.md
+        mdFiles.sort((a, b) => {
+            let partsA = a.name.replace('.md', '').split('_');
+            let partsB = b.name.replace('.md', '').split('_');
+            let dateA = new Date(partsA[2], partsA[1] - 1, partsA[0]);
+            let dateB = new Date(partsB[2], partsB[1] - 1, partsB[0]);
+            return dateB - dateA; 
+        });
+
         container.innerHTML = '';
 
-        // 3. Проходимося по кожному файлу і витягуємо контент
+        // Рендеримо пости
         for (let file of mdFiles) {
-            // download_url - це пряме посилання на сирий текст файлу
             const textResponse = await fetch(file.download_url);
+            if (!textResponse.ok) continue; 
+            
             const mdText = await textResponse.text();
-
-            // 4. Парсимо Markdown у HTML
             const htmlContent = marked.parse(mdText);
 
-            // 5. Створюємо блок для поста і кидаємо на сторінку
             const article = document.createElement('article');
-            article.className = 'day-post'; // Клас для твого style.css
-            
-            // Робимо заголовок з назви файлу (прибираємо .md)
             const dateTitle = file.name.replace('.md', ''); 
             
             article.innerHTML = `
-                <h3 class="post-date">[${dateTitle}]</h3>
+                <div class="post-header">~/${dateTitle}</div>
                 <div class="post-content">${htmlContent}</div>
-                <hr style="border-color: #333;">
+                <hr class="day-separator">
             `;
             
             container.appendChild(article);
@@ -48,9 +78,8 @@ async function loadDays() {
 
     } catch (error) {
         console.error(error);
-        container.innerHTML = '<p>Помилка: не вдалося завантажити дні. Перевір чи закинув ти код на GitHub.</p>';
+        container.innerHTML = '<p>Помилка завантаження постів.</p>';
     }
 }
 
-// Запускаємо
 loadDays();
