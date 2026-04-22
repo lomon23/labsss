@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+/* Підключаємо іконки */
+@import url('https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css');
 
 /* Базові налаштування терміналу */
 body {
-    background-color: #1a1b26; /* Темно-синій, як у Catalyst */
+    background-color: #1a1b26; 
     color: #a9b1d6;
     font-family: 'JetBrains Mono', monospace;
-    max-width: 800px;
+    max-width: 1000px; /* Зробили ширше */
+    font-size: 18px;   /* Зробили більшим */
     margin: 0 auto;
     padding: 40px 20px;
     line-height: 1.6;
@@ -39,23 +42,100 @@ h1, h2, h3 {
     font-weight: normal;
 }
 
-/* Стилі для самих постів */
+/* Стилі для самих постів (сторінка днів) */
 .post-header {
     color: #bb9af7;
     font-size: 0.9em;
     margin-bottom: 15px;
 }
 
-/* Риска, якою ти розділяєш дні */
 hr.day-separator {
     border: none;
     border-top: 1px dashed #444;
     margin: 40px 0;
 }
 
-/* Риска, яку генерує Markdown від --- */
 .post-content hr {
     border: none;
     border-top: 1px solid #333;
     margin: 20px 0;
+}
+
+/* =========================================
+   НОВЕ: Лейаут для головної сторінки з боковим меню
+   ========================================= */
+.layout {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.main-content {
+    flex: 1; /* Займає весь вільний простір */
+}
+
+.sidebar {
+    width: 250px;
+    flex-shrink: 0; /* Не дає сайдбару стискатися */
+    padding-left: 30px;
+    border-left: 1px dashed #333;
+}
+
+/* Стилі для іконок та посилань у сайдбарі */
+.social-links {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+}
+
+.social-links li {
+    margin-bottom: 12px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    color: #a9b1d6;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.social-links a i {
+    font-size: 24px;
+    margin-right: 10px;
+    color: #7aa2f7; /* Синій колір для іконок */
+}
+
+.social-links a:hover {
+    color: #9ece6a; /* Зелений при наведенні */
+}
+
+/* Блок "Щось ще" в сайдбарі */
+.sidebar-widget {
+    background-color: #1f2335;
+    padding: 15px;
+    border: 1px solid #333;
+    font-size: 14px;
+}
+
+.sidebar-widget p {
+    margin: 5px 0;
+}
+
+.cmd-prompt {
+    color: #9ece6a;
+}
+
+/* Адаптація для телефону (щоб не ламалося) */
+@media (max-width: 768px) {
+    .layout {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        border-left: none;
+        border-top: 1px dashed #333;
+        padding-left: 0;
+        padding-top: 30px;
+    }
 }
