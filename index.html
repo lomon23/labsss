@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>~/home</title>
     <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     <nav class="navigation">
@@ -14,38 +15,54 @@
         <a href="pages/drawings.html">Малюнки</a>
     </nav>
 
-    <div class="layout">
+    <div class="layout-3col">
+        
+        <aside class="sidebar-left">
+            <div class="profile-photo">
+                [Photo_Placeholder]
+            </div>
+
+            <div class="sidebar-widget" style="margin-bottom: 20px;">
+                <p><span class="cmd-prompt">~ $</span> whoami</p>
+                <p>Cybersec student @ LNU</p>
+            </div>
+
+            <div class="sidebar-widget">
+                <p><span class="cmd-prompt">~ $</span> cat stack.txt</p>
+                <p>• C++ / Qt</p>
+                <p>• Python / Django</p>
+                <p>• React / JS</p>
+                <p>• Arch Linux (btw)</p>
+            </div>
+        </aside>
+
         <main class="main-content">
             <h1># Головна</h1>
             <p>Місце для думок, коду та іншого.</p>
             <p>Якщо ти тут без мети, можеш просто поклацати по вкладках.</p>
             <br>
-            <p>Тут можна додати ще якийсь вступний текст, опис проєктів або просто залишити порожнім.</p>
+            
+            <p>Соціальні мережі для зв'язку:</p>
+            <ul class="social-links">
+                <li><a href="#" target="_blank"><i class='bx bxl-github'></i> GitHub</a></li>
+                <li><a href="#" target="_blank"><i class='bx bxl-telegram'></i> Telegram</a></li>
+                <li><a href="#" target="_blank"><i class='bx bxl-instagram'></i> Instagram</a></li>
+                <li><a href="#" target="_blank"><i class='bx bxl-linkedin-square'></i> LinkedIn</a></li>
+            </ul>
         </main>
 
-        <aside class="sidebar">
-            <ul class="social-links">
-                <li>
-                    <a href="#" target="_blank"><i class='bx bxl-github'></i> GitHub</a>
-                </li>
-                <li>
-                    <a href="#" target="_blank"><i class='bx bxl-telegram'></i> Telegram</a>
-                </li>
-                <li>
-                    <a href="#" target="_blank"><i class='bx bxl-instagram'></i> Instagram</a>
-                </li>
-                <li>
-                    <a href="#" target="_blank"><i class='bx bxl-linkedin-square'></i> LinkedIn</a>
-                </li>
-            </ul>
-
+        <aside class="sidebar-right">
             <div class="sidebar-widget">
-                <p><span class="cmd-prompt">~ $</span> whoami</p>
-                <p>Cybersec student</p>
-                <p>C++ / Qt / Web</p>
-                <p>Arch Linux (btw)</p>
+                <p><span class="cmd-prompt">~ $</span> ls ./projects</p>
+                <ul class="repo-list">
+                    <li><i class='bx bx-folder'></i> <a href="#">Academic_OS</a></li>
+                    <li><i class='bx bx-folder'></i> <a href="#">SciRise</a></li>
+                    <li><i class='bx bx-folder'></i> <a href="#">OBOZHE</a></li>
+                    <li><i class='bx bx-folder'></i> <a href="#">minimal_blog</a></li>
+                </ul>
             </div>
         </aside>
+
     </div>
 </body>
 </html>
