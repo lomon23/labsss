@@ -1,0 +1,72 @@
+.projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.project-block {
+    border: 1px solid #333;
+    padding: 25px;
+    position: relative;
+    background-color: #1a1b26;
+    transition: border-color 0.3s ease;
+}
+
+.project-block:hover {
+    border-color: #565f89;
+}
+
+.project-title {
+    color: #c0caf5;
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.project-title::before { 
+    content: "# "; 
+    color: #565f89; 
+}
+
+.project-info {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 5px;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.info-label { color: #7aa2f7; }
+.info-value { color: #a9b1d6; }
+.info-value a { color: #bb9af7; text-decoration: none; }
+.info-value a:hover { text-decoration: underline; }
+
+.project-desc {
+    border-top: 1px dashed #333;
+    padding-top: 15px;
+    color: #949eb2;
+    margin-bottom: 15px;
+}
+
+.stack-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+}
+
+.stack-list li { color: #9ece6a; font-size: 14px; }
+.stack-list li::before { content: "["; color: #444; }
+.stack-list li::after { content: "]"; color: #444; }
+
+/* Анімація статусів */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.info-value[style*="color: #bb9af7"], 
+.info-value[style*="color: #e0af68"] {
+    animation: pulse 2s infinite ease-in-out;
+}

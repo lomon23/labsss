@@ -5,22 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>~/days</title>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="about_day.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
-    <nav class="navigation">
-        <a href="../index.html">Головна</a>
-        <a href="about_day.html" class="active">[Дні]</a>
-        <a href="project.html">Проєкти</a>
-        <a href="drawings.html">Малюнки</a>
-    </nav>
+    <div class="container">
+        <nav class="navigation">
+            <a href="../index.html">[Головна]</a>
+            <a href="about_day.html" class="active">Дні</a>
+            <a href="project.html">Проєкти</a>
+            <a href="drawings.html">Малюнки</a>
+        </nav>
 
-    <main>
-        <h1># Дні</h1>
-        <div id="days-container">
-            <p>Звертаюсь до API GitHub. Чекай...</p>
+        <div class="layout-3col">
+            
+
+            <main class="main-content">
+                <h1># Personal Logs</h1>
+                <div id="days-container" class="post-content">
+                    <p class="loading-text">system_status: accessing_files...</p>
+                </div>
+            </main>
+
         </div>
-    </main>
+    </div>
 
     <script src="../script.js"></script>
 </body>

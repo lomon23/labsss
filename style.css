@@ -2,20 +2,40 @@
 @import url('https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css');
 
 /* =========================================
-   БАЗОВІ НАЛАШТУВАННЯ ТЕРМІНАЛУ
+   БАЗОВІ НАЛАШТУВАННЯ ТА ФОН
    ========================================= */
-*{
-    
+html {
+    background-color: #0a0b10;
 }
+
 body {
-    background-color: #1a1b26; 
-    color: #a9b1d6;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    /* Один блок фону: градієнт + картинка + фіксація при скролі */
+    background: 
+        linear-gradient(rgba(10, 11, 16, 0.85), rgba(10, 11, 16, 0.85)), 
+        url('https://images.unsplash.com/photo-1464802686167-b939a6910659?q=80&w=1920') no-repeat center center fixed;
+    background-size: cover;
     font-family: 'JetBrains Mono', monospace;
-    max-width: 1300px; /* Широкий контейнер */
-    font-size: 18px;
-    margin: 0 auto;
-    padding: 40px 20px;
+    color: #a9b1d6;
     line-height: 1.6;
+}
+
+/* =========================================
+   ЦЕНТРАЛЬНИЙ БЛОК
+   ========================================= */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #1a1b26; 
+    min-height: 100vh; 
+    padding: 40px;
+    box-sizing: border-box;
+    border-left: 1px solid #333;
+    border-right: 1px solid #333;
+    display: flex;
+    flex-direction: column;
 }
 
 h1, h2, h3 {
@@ -24,7 +44,7 @@ h1, h2, h3 {
 }
 
 /* =========================================
-   НАВІГАЦІЯ (ВЕРХНЄ МЕНЮ)
+   НАВІГАЦІЯ
    ========================================= */
 .navigation {
     margin-bottom: 40px;
@@ -38,79 +58,56 @@ h1, h2, h3 {
     margin-right: 15px;
 }
 
-.navigation a:hover {
-    color: #9ece6a;
-}
-
-.navigation a.active {
+.navigation a:hover, .navigation a.active {
     color: #9ece6a;
     font-weight: bold;
 }
 
 /* =========================================
-   СТИЛІ ДЛЯ ДНІВ (about_day.html)
-   ========================================= */
-.post-header {
-    color: #bb9af7;
-    font-size: 0.9em;
-    margin-bottom: 15px;
-}
-
-hr.day-separator {
-    border: none;
-    border-top: 1px dashed #444;
-    margin: 40px 0;
-}
-
-.post-content hr {
-    border: none;
-    border-top: 1px solid #333;
-    margin: 20px 0;
-}
-
-/* =========================================
-   ГОЛОВНА СТОРІНКА (СІТКА НА 3 КОЛОНКИ)
+   ЛЕЙАУТ (РОЗУМНИЙ FLEXBOX ЗАМІСТЬ GRID)
    ========================================= */
 .layout-3col {
-    display: grid;
-    grid-template-columns: 250px 1fr 250px;
+    display: flex;
     gap: 40px;
-    align-items: start;
+    flex-grow: 1;
+    align-items: flex-start;
 }
 
-.sidebar-left {
-    border-right: 1px dashed #333;
-    padding-right: 20px;
+.sidebar-left, .sidebar-right { 
+    width: 250px;
+    flex-shrink: 0; /* Сайдбари не звужуються */
 }
 
-.sidebar-right {
-    border-left: 1px dashed #333;
-    padding-left: 20px;
+.sidebar-left { 
+    border-right: 1px dashed #333; 
+    padding-right: 20px; 
+}
+
+.sidebar-right { 
+    border-left: 1px dashed #333; 
+    padding-left: 20px; 
 }
 
 .main-content {
-    /* Центр просто займає своє місце */
+    flex-grow: 1;
+    min-width: 0; /* Запобігає розриву flex-контейнера довгим текстом */
+    padding-bottom: 60px; 
 }
 
 /* =========================================
-   ВІДЖЕТИ ТА БОКОВІ ЕЛЕМЕНТИ
+   ВІДЖЕТИ ТА ІНШЕ
    ========================================= */
 .sidebar-widget {
     background-color: #1f2335;
     padding: 15px;
     border: 1px solid #333;
     font-size: 14px;
+    margin-bottom: 20px;
 }
 
-.sidebar-widget p {
-    margin: 5px 0;
-}
+.sidebar-widget p { margin: 5px 0; }
+.cmd-prompt { color: #9ece6a; }
 
-.cmd-prompt {
-    color: #9ece6a;
-}
-
-/* Блок для фотки */
 .profile-photo {
     width: 100%;
     aspect-ratio: 1;
@@ -119,29 +116,21 @@ hr.day-separator {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #565f89;
     margin-bottom: 20px;
     overflow: hidden;
 }
 
-.profile-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+.profile-photo img { width: 100%; height: 100%; object-fit: cover; }
 
-/* Соціальні мережі (по центру) */
-.social-links {
+.social-links, .repo-list {
     list-style: none;
     padding: 0;
     margin: 0 0 30px 0;
 }
 
-.social-links li {
-    margin-bottom: 12px;
-}
+.social-links li, .repo-list li { margin-bottom: 12px; }
 
-.social-links a {
+.social-links a, .repo-list a {
     display: flex;
     align-items: center;
     color: #a9b1d6;
@@ -149,45 +138,14 @@ hr.day-separator {
     transition: color 0.2s;
 }
 
-.social-links a i {
-    font-size: 24px;
-    margin-right: 10px;
-    color: #7aa2f7;
-}
+.social-links a i { font-size: 24px; margin-right: 10px; color: #7aa2f7; }
+.repo-list i { margin-right: 8px; color: #565f89; }
 
-.social-links a:hover {
-    color: #9ece6a;
-}
+.social-links a:hover { color: #9ece6a; }
+.repo-list a:hover { color: #9ece6a; text-decoration: underline; }
 
-/* Список проєктів (правий сайдбар) */
-.repo-list {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0 0 0;
-}
-
-.repo-list li {
-    margin-bottom: 10px;
-}
-
-.repo-list a {
-    color: #7aa2f7;
-    text-decoration: none;
-}
-
-.repo-list a:hover {
-    color: #9ece6a;
-    text-decoration: underline;
-}
-
-/* =========================================
-   АДАПТАЦІЯ ДЛЯ ТЕЛЕФОНІВ
-   ========================================= */
 @media (max-width: 1000px) {
-    .layout-3col {
-        grid-template-columns: 1fr; /* Робимо 1 колонку */
-    }
-    .sidebar-left, .sidebar-right {
-        display: none; /* Жорстко ховаємо бокові панелі */
-    }
+    .layout-3col { flex-direction: column; }
+    .sidebar-left, .sidebar-right { display: none; }
+    .container { border: none; padding: 20px; }
 }
